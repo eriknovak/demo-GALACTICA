@@ -1,0 +1,12 @@
+numpy
+pandas
+jupyter
+ipywidgets
+ipykernel
+torch
+transformers
+accelerate
+datasets
+gradio
+python-dotenv
+black
