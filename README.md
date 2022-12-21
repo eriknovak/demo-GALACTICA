@@ -1,6 +1,6 @@
-# GALACTICA Playground
+# GALACTICA Demo
 
-The GALACTICA playground is the place to experiment with the [GALACTICA][galactica-paper] language model.
+The GALACTICA demo is the place to experiment with the [GALACTICA][galactica-paper] language model.
 
 ## ☑️ Requirements
 
