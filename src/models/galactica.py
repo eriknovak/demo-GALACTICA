@@ -14,6 +14,7 @@ class ModelAction(str, Enum):
 
     CITATION = "Find Citation"
     QUESTION = "Answer Question"
+    GENERATION = "Generate Text"
 
 
 def prepare_prompt(prompt: str, action: ModelAction) -> str:
@@ -26,14 +27,6 @@ def prepare_prompt(prompt: str, action: ModelAction) -> str:
         return prompt
 
 
-def prepare_output(output: str, action: ModelAction) -> str:
-    """Prepare the output for the model."""
-    if action == ModelAction.CITATION:
-        return output.split("[END_REF]")[0] + "[END_REF]"
-    else:
-        return output
-
-
 # ====================================================================
 # Model definition
 # ====================================================================
@@ -41,7 +34,7 @@ def prepare_output(output: str, action: ModelAction) -> str:
 
 class GALACTICA:
     def __init__(
-        self, model_name: str = "facebook/galactica-125m", use_gpu=False
+        self, model_name: str = "facebook/galactica-125m", use_gpu: bool = False
     ) -> None:
         """Initialize the model."""
         self.use_gpu = use_gpu
@@ -58,13 +51,5 @@ class GALACTICA:
         input_ids = self.tokenizer(prepared_prompt, return_tensors="pt").input_ids
         if self.use_gpu:
             input_ids = input_ids.cuda()
-        output = self.model.generate(
-            input_ids,
-            max_new_tokens=max_length,
-            do_sample=False,
-            num_beams=5,
-            top_p=1.0,
-            top_k=50,
-            temperature=1.0,
-        )
-        return prepare_output(self.tokenizer.decode(output[0]), action)
+        output = self.model.generate(input_ids, max_new_tokens=max_length)
+        return self.tokenizer.decode(output[0])

@@ -10,3 +10,4 @@ datasets
 gradio==3.13.0
 python-dotenv
 black
+altair

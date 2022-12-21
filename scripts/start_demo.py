@@ -29,7 +29,7 @@ model = GALACTICA(model_name, use_gpu=use_gpu)
 gr_inputs = [
     gr.Textbox(lines=3, placeholder="Insert prompt here...", label="Prompt"),
     gr.Radio(
-        [ModelAction.CITATION, ModelAction.QUESTION],
+        [ModelAction.CITATION, ModelAction.QUESTION, ModelAction.GENERATION],
         value=ModelAction.CITATION,
         label="Action",
     ),
