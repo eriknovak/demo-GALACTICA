@@ -29,8 +29,8 @@ model = GALACTICA(model_name, use_gpu=use_gpu)
 gr_inputs = [
     gr.Textbox(lines=3, placeholder="Insert prompt here...", label="Prompt"),
     gr.Radio(
-        [ModelAction.CITATION, ModelAction.QUESTION, ModelAction.GENERATION],
-        value=ModelAction.CITATION,
+        [ModelAction.GENERATION, ModelAction.CITATION, ModelAction.QUESTION],
+        value=ModelAction.GENERATION,
         label="Action",
     ),
     gr.Slider(minimum=20, maximum=512, value=100, label="Max Length"),
@@ -41,13 +41,9 @@ gr_outputs = gr.Textbox(lines=10, label="Output")
 
 # Define the interface examples
 gr_examples = [
+    ["The problem with entity coreference resolution is", ModelAction.GENERATION, 120],
     ["The paper that introduced Multi-Head Attention", ModelAction.CITATION, 40],
     ["How is the Pytagorean theorem defined?", ModelAction.QUESTION, 40],
-    [
-        "Why is a Transformer model better than an RNN model?",
-        ModelAction.QUESTION,
-        40,
-    ],
 ]
 
 # Define the interface
